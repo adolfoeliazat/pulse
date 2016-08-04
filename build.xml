@@ -114,9 +114,9 @@ Command Line Defines:
     <!--
     <pathelement location="${application.extlib.home}/json-20151123.jar"/>
     <pathelement location="${application.extlib.home}/com.springsource.org.apache.commons.collections-3.2.1.jar"/>
-    <pathelement location="${application.extlib.home}/tomcat-embed-core-7.0.50.jar"/>
-    <pathelement location="${application.extlib.home}/tomcat-embed-jasper-7.0.50.jar"/>
-    <pathelement location="${application.extlib.home}/tomcat-embed-logging-juli-7.0.50.jar"/>
+    <pathelement location="${application.extlib.home}/tomcat-embed-core-7.0.70.jar"/>
+    <pathelement location="${application.extlib.home}/tomcat-embed-jasper-7.0.70.jar"/>
+    <pathelement location="${application.extlib.home}/tomcat-embed-logging-juli-7.0.70.jar"/>
     <pathelement location="${application.extlib.home}/junit-4.11.jar"/>
     <pathelement location="${application.extlib.home}/hamcrest-core-1.3.jar"/>
     -->
@@ -246,15 +246,15 @@ Command Line Defines:
     <copy file="${application.extlib.home}/spring-security-ldap-3.1.7.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
     <copy file="${application.extlib.home}/spring-ldap-core-1.3.2.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
 
-    <copy file="${application.extlib.home}/spring-core-3.2.16.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
-    <copy file="${application.extlib.home}/spring-web-3.2.16.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
-    <copy file="${application.extlib.home}/spring-beans-3.2.16.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
-    <copy file="${application.extlib.home}/spring-context-3.2.16.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
-    <copy file="${application.extlib.home}/spring-aspects-3.2.16.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
-    <copy file="${application.extlib.home}/spring-expression-3.2.16.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
-    <copy file="${application.extlib.home}/spring-aop-3.2.16.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
-    <copy file="${application.extlib.home}/spring-webmvc-3.2.16.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
-    <copy file="${application.extlib.home}/spring-tx-3.2.16.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
+    <copy file="${application.extlib.home}/spring-core-3.2.17.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
+    <copy file="${application.extlib.home}/spring-web-3.2.17.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
+    <copy file="${application.extlib.home}/spring-beans-3.2.17.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
+    <copy file="${application.extlib.home}/spring-context-3.2.17.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
+    <copy file="${application.extlib.home}/spring-aspects-3.2.17.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
+    <copy file="${application.extlib.home}/spring-expression-3.2.17.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
+    <copy file="${application.extlib.home}/spring-aop-3.2.17.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
+    <copy file="${application.extlib.home}/spring-webmvc-3.2.17.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
+    <copy file="${application.extlib.home}/spring-tx-3.2.17.RELEASE.jar" todir="${target.dir}/WEB-INF/lib"/>
 
     <copy file="${application.extlib.home}/com.springsource.org.apache.commons.beanutils-1.8.3.jar" todir="${target.dir}/WEB-INF/lib"/>
     <copy file="${application.extlib.home}/com.springsource.org.apache.commons.collections-3.2.1.jar" todir="${target.dir}/WEB-INF/lib"/>
