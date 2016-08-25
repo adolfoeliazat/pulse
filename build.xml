@@ -262,6 +262,8 @@ Command Line Defines:
     <copy file="${application.extlib.home}/com.springsource.org.apache.commons.logging-1.1.1.jar" todir="${target.dir}/WEB-INF/lib"/>
     <copy file="${application.extlib.home}/commons-lang-2.6.jar" todir="${target.dir}/WEB-INF/lib"/>
     <copy file="${application.extlib.home}/json-20151123.jar" todir="${target.dir}/WEB-INF/lib"/>
+    <copy file="${application.extlib.home}/hibernate-validator-4.3.2.Final.jar" todir="${target.dir}/WEB-INF/lib"/>
+    <copy file="${application.extlib.home}/jboss-logging-3.3.0.Final.jar" todir="${target.dir}/WEB-INF/lib"/>
 
     <copy file="src/main/resources/pulse-users.properties" todir="${target.dir}/WEB-INF/classes"/>
 

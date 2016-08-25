@@ -51,6 +51,8 @@ dependencies {
   provided 'commons-lang:commons-lang:2.6'
   provided 'commons-logging:commons-logging:1.2'
   provided 'org.json:json:20151123'
+  provided 'org.hibernate:hibernate-validator:4.3.2.Final'
+  provided 'org.jboss.logging:jboss-logging:3.3.0.Final'
   provided 'org.springframework:spring-core:3.2.17.RELEASE'
   provided 'org.springframework:spring-web:3.2.17.RELEASE'
   provided 'org.springframework:spring-beans:3.2.17.RELEASE'

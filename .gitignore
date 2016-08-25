@@ -14,3 +14,7 @@ ReleaseNotes.txt.UPDATE
 # git related
 .git-history.log
 update-git.log
+
+# Idea IDE specific
+.idea
+*.iml
