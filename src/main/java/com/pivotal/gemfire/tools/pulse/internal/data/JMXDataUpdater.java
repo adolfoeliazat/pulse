@@ -469,13 +469,21 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
         for (ObjectName tableMBean : tableMBeans) {
           String regNameFromTable = StringUtils
               .getRegionNameFromTableName(tableMBean.getKeyProperty("table"));
+          String regColStoreNameFromTable = StringUtils
+              .getRegionColumnStoreNameFromTableName(tableMBean.getKeyProperty("table"));
+
           for (ObjectName regionMBean : regionMBeans) {
             String regionName = regionMBean.getKeyProperty("name");
             if (regNameFromTable.equals(regionName)) {
               updateClusterRegion(regionMBean);
               // Increment cluster region count
               cluster.setTotalRegionCount(cluster.getTotalRegionCount() + 1);
-              break;
+            } else {
+              // Check if region is Column Store region
+              if(regionName.endsWith(regColStoreNameFromTable)){
+                // set respective co-located regions column store region property and update that region details
+                updateClusterRegionFromColumnStore(regionMBean);
+              }
             }
           }
         }
@@ -511,10 +519,20 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
                         String regNameFromTable = StringUtils
                                 .getRegionNameFromTableName(tableMBean
                                         .getKeyProperty("table"));
+                        String regColStoreNameFromTable = StringUtils
+                            .getRegionColumnStoreNameFromTableName(tableMBean
+                                .getKeyProperty("table"));
+
                         String regionName = memMBean.getKeyProperty("name");
                         if (regNameFromTable.equals(regionName)) {
                             updateMemberRegion(memMBean);
                             break;
+                        } else {
+                          // Check if region is Column Store region
+                          if(regionName.endsWith(regColStoreNameFromTable)){
+                            // set respective co-located regions column store region property and update that region details
+                            updateMemberRegionFromColumnStore(memMBean);
+                          }
                         }
                     }
                 }else{
@@ -1324,15 +1342,125 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
       // will be a no-op.
       cluster.addClusterRegion(regionFullPath, region);
       cluster.getDeletedRegions().remove(region.getFullPath());
-      // Memory Reads and writes
-      region.getPutsPerSecTrend().add(region.getPutsRate());
-      region.getGetsPerSecTrend().add(region.getGetsRate());
-      // Disk Reads and Writes
-      region.getDiskReadsPerSecTrend().add(region.getDiskReadsRate());
-      region.getDiskWritesPerSecTrend().add(region.getDiskWritesRate());
-      // Average Reads and Writes
-      region.getAverageReadsTrend().add(region.getAverageReads());
-      region.getAverageWritesTrend().add(region.getAverageWrites());
+      // if not co-located/column table
+      if(!region.isColocatedWith()){
+        // Memory Reads and writes
+        region.getPutsPerSecTrend().add(region.getPutsRate());
+        region.getGetsPerSecTrend().add(region.getGetsRate());
+        // Disk Reads and Writes
+        region.getDiskReadsPerSecTrend().add(region.getDiskReadsRate());
+        region.getDiskWritesPerSecTrend().add(region.getDiskWritesRate());
+        // Average Reads and Writes
+        region.getAverageReadsTrend().add(region.getAverageReads());
+        region.getAverageWritesTrend().add(region.getAverageWrites());
+      }
+
+    } catch (InstanceNotFoundException infe) {
+      LOGGER.warning(infe);
+    } catch (ReflectionException re) {
+      LOGGER.warning(re);
+    } catch (MBeanException anfe) {
+      LOGGER.warning(anfe);
+    }
+  }
+
+  private void updateClusterRegionFromColumnStore(ObjectName mbeanName) throws IOException {
+
+    try {
+
+      String regNameColocatedWith = null;
+
+      CompositeData compositeData = (CompositeData) (this.mbs.invoke(mbeanName,
+          PulseConstants.MBEAN_OPERATION_LISTPARTITIONATTRIBUTES, null, null));
+
+      if (compositeData != null) {
+        if (compositeData
+            .containsKey(PulseConstants.COMPOSITE_DATA_KEY_COLOCATEDWITH)) {
+          regNameColocatedWith = (String) compositeData
+              .get(PulseConstants.COMPOSITE_DATA_KEY_COLOCATEDWITH);
+        }
+      }
+
+      if (null != regNameColocatedWith) {
+        
+        Cluster.Region region = cluster.getClusterRegions().get(regNameColocatedWith);
+
+        if (null == region) {
+          region = new Cluster.Region();
+        }
+
+        AttributeList attributeList = this.mbs.getAttributes(mbeanName,
+            PulseConstants.REGION_MBEAN_ATTRIBUTES);
+
+        for (int i = 0; i < attributeList.size(); i++) {
+
+          Attribute attribute = (Attribute) attributeList.get(i);
+
+          if (attribute.getName().equals(PulseConstants.MBEAN_ATTRIBUTE_FULLPATH)) {
+            String colStoreRegionFullPath = getStringAttribute(attribute.getValue(),
+                attribute.getName());
+            // set co-located flag true
+            region.setColocatedWith(true);
+            region.setRegionColcatedWith(colStoreRegionFullPath);
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_DISKREADSRATE)) {
+            region.setDiskReadsRate_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_DISKWRITESRATE)) {
+            region.setDiskWritesRate_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_GETSRATE)) {
+            region.setGetsRate_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_PUTSRATE)) {
+            region.setPutsRate_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_AVERAGEREADS)) {
+            region.setAverageReads_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_AVERAGEWRITES)) {
+            region.setAverageWrites_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_ENTRYSIZE)) {
+            region.setEntrySize_columnStore(getLongAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_SYSTEMREGIONENTRYCOUNT)) {
+            region.setSystemRegionEntryCount_columnStore(getLongAttribute(
+                attribute.getValue(), attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_ROWSINCACHEDBATCHES)) {
+            region.setRowsInCachedBatches_columnStore(getLongAttribute(
+                attribute.getValue(), attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_DISKUSAGE)) {
+            region.setDiskUsage_columnStore(getLongAttribute(attribute.getValue(),
+                attribute.getName()));
+          }
+        }
+
+        // Add to map even if region is present. If region is already there it
+        // will be a no-op. 
+        cluster.addClusterRegion(regNameColocatedWith, region);
+        cluster.getDeletedRegions().remove(region.getFullPath());
+        // Sum up the respective attribute values from region and its column store region and store them into region itself
+        // Memory Reads and writes 
+        region.getPutsPerSecTrend().add(region.getPutsRate() + region.getPutsRate_columnStore());
+        region.getGetsPerSecTrend().add(region.getGetsRate() + region.getGetsRate_columnStore());
+        // Disk Reads and Writes
+        region.getDiskReadsPerSecTrend().add(region.getDiskReadsRate() + region.getDiskReadsRate_columnStore());
+        region.getDiskWritesPerSecTrend().add(region.getDiskWritesRate() + region.getDiskWritesRate_columnStore());
+        // Average Reads and Writes
+        region.getAverageReadsTrend().add(region.getAverageReads() + region.getAverageReads_columnStore());
+        region.getAverageWritesTrend().add(region.getAverageWrites() + region.getAverageWrites_columnStore());
+
+      }
 
     } catch (InstanceNotFoundException infe) {
       LOGGER.warning(infe);
@@ -2080,6 +2208,105 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
         }
         member.setTotalRegionCount(member.getMemberRegions().size());
       }
+    } catch (InstanceNotFoundException infe) {
+      LOGGER.warning(infe);
+    } catch (ReflectionException re) {
+      LOGGER.warning(re);
+    } catch (MBeanException anfe) {
+      LOGGER.warning(anfe);
+    }
+  }
+
+  private void updateMemberRegionFromColumnStore(ObjectName mbeanName) throws IOException {
+
+    try {
+      String memberName = mbeanName
+          .getKeyProperty(PulseConstants.MBEAN_KEY_PROPERTY_MEMBER);
+
+      Cluster.Member member = cluster.getMembersHMap().get(memberName);
+
+      // if member does not exists defined for this region then create a member
+      if (null == member) {
+        member = new Cluster.Member();
+        member.setName(memberName);
+        cluster.getMembersHMap().put(memberName, member);
+      }
+
+      String regNameColocatedWith = null;
+
+      CompositeData compositeData = (CompositeData) (mbs.invoke(mbeanName,
+          PulseConstants.MBEAN_OPERATION_LISTPARTITIONATTRIBUTES, null, null));
+
+      if (compositeData.containsKey(PulseConstants.COMPOSITE_DATA_KEY_COLOCATEDWITH)) {
+        regNameColocatedWith = (String) compositeData
+            .get(PulseConstants.COMPOSITE_DATA_KEY_COLOCATEDWITH);
+      }
+
+      if (null != regNameColocatedWith) {
+
+        // if region with given path exists then update same else add new region
+        Cluster.Region region = member.getMemberRegions().get(regNameColocatedWith);
+
+        if (null == region) {
+          region = new Cluster.Region();
+          member.getMemberRegions().put(regNameColocatedWith, region);
+          member.setTotalRegionCount(member.getTotalRegionCount() + 1);
+        }
+
+        AttributeList attributeList = this.mbs.getAttributes(mbeanName,
+            PulseConstants.REGION_MBEAN_ATTRIBUTES);
+
+        // update the existing or new region
+        for (int i = 0; i < attributeList.size(); i++) {
+          Attribute attribute = (Attribute) attributeList.get(i);
+
+          if (attribute.getName().equals(PulseConstants.MBEAN_ATTRIBUTE_FULLPATH)) {
+            String regionFullPath = getStringAttribute(attribute.getValue(),
+                attribute.getName());
+            // set co-located flag true
+            region.setColocatedWith(true);
+            region.setRegionColcatedWith(regionFullPath);
+
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_DISKREADSRATE)) {
+            region.setDiskReadsRate_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_DISKWRITESRATE)) {
+            region.setDiskWritesRate_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_GETSRATE)) {
+            region.setGetsRate_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_PUTSRATE)) {
+            region.setPutsRate_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_AVERAGEREADS)) {
+            region.setAverageReads_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_AVERAGEWRITES)) {
+            region.setAverageWrites_columnStore(getFloatAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_ENTRYSIZE)) {
+            region.setEntrySize_columnStore(getLongAttribute(attribute.getValue(),
+                attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_ENTRYCOUNT)) {
+            region.setSystemRegionEntryCount_columnStore(getLongAttribute(
+                attribute.getValue(), attribute.getName()));
+          } else if (attribute.getName().equals(
+              PulseConstants.MBEAN_ATTRIBUTE_ROWSINCACHEDBATCHES)) {
+            region.setRowsInCachedBatches_columnStore(getLongAttribute(
+                attribute.getValue(), attribute.getName()));
+          }
+        }
+      }
+
     } catch (InstanceNotFoundException infe) {
       LOGGER.warning(infe);
     } catch (ReflectionException re) {

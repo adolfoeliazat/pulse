@@ -123,13 +123,15 @@ public class ClusterRegionService implements PulseService {
 
       regionJSON.put("name", reg.getName());
       regionJSON.put("totalMemory", totalHeapSize);
-      regionJSON.put("systemRegionEntryCount", reg.getSystemRegionEntryCount());
+
       regionJSON.put("memberCount", reg.getMemberCount());
 
       final String regionType = reg.getRegionType();
       regionJSON.put("type", regionType);
-      regionJSON.put("getsRate", reg.getGetsRate());
-      regionJSON.put("putsRate", reg.getPutsRate());
+
+      // collective rates from region and its column store region
+      regionJSON.put("getsRate", (reg.getGetsRate() + reg.getGetsRate_columnStore()));
+      regionJSON.put("putsRate", (reg.getPutsRate() + reg.getPutsRate_columnStore()));
 
       Cluster.Member[] clusterMembersList = cluster.getMembers();
 
@@ -152,7 +154,10 @@ public class ClusterRegionService implements PulseService {
       }
 
       regionJSON.put("memberNames", memberNameArray);
-      regionJSON.put("entryCount", reg.getSystemRegionEntryCount());
+
+      // collective entry count from region and its column store region
+      regionJSON.put("entryCount", (reg.getSystemRegionEntryCount() + reg.getSystemRegionEntryCount_columnStore()));
+      regionJSON.put("systemRegionEntryCount", (reg.getSystemRegionEntryCount() + reg.getRowsInCachedBatches_columnStore()));
 
       Boolean persistent = reg.getPersistentEnabled();
       if (persistent) {
@@ -225,8 +230,11 @@ public class ClusterRegionService implements PulseService {
               "averageWritesTrend",
               new JSONArray(
                   reg.getRegionStatisticTrend(Cluster.Region.REGION_STAT_AVERAGE_WRITES_TREND)));
+      
       regionJSON.put("emptyNodes", reg.getEmptyNode());
-      Long entrySize = reg.getEntrySize();
+
+      // collective entry size from region and its column store region 
+      Long entrySize = reg.getEntrySize() + reg.getEntrySize_columnStore();
       DecimalFormat form = new DecimalFormat(
           PulseConstants.DECIMAL_FORMAT_PATTERN_2);
       String entrySizeInMB = form.format(entrySize / (1024f * 1024f));
@@ -236,7 +244,10 @@ public class ClusterRegionService implements PulseService {
       } else {
         regionJSON.put(this.ENTRY_SIZE, entrySizeInMB);
       }
-      regionJSON.put("dataUsage", reg.getDiskUsage());
+
+      // collective Disk Usage from region and its column store region
+      regionJSON.put("dataUsage", (reg.getDiskUsage() + reg.getDiskUsage_columnStore()));
+
       regionJSON.put("wanEnabled", reg.getWanEnabled());
       regionJSON.put("totalDataUsage", totalDiskUsage);
 

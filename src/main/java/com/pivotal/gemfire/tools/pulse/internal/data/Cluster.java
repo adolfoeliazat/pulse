@@ -1185,6 +1185,20 @@ public class Cluster extends Thread {
     private String compressionCodec = "";
     private boolean hdfsWriteOnly;
 
+    // fields defined in related column store region MBean
+    private boolean isColocatedWith = false;
+    private String regionColcatedWith;
+    private long entrySize_columnStore; 
+    private long SystemRegionEntryCount_columnStore;
+    private long RowsInCachedBatches_columnStore;
+    private float diskReadsRate_columnStore;
+    private float diskWritesRate_columnStore;
+    private float getsRate_columnStore;
+    private float putsRate_columnStore;
+    private float averageReads_columnStore;
+    private float averageWrites_columnStore;
+    private long diskUsage_columnStore;
+
     private List<String> memberName = new ArrayList<String>();
     private CircularFifoBuffer getsPerSecTrend = new CircularFifoBuffer(
         MAX_SAMPLE_SIZE);
@@ -1492,6 +1506,103 @@ public class Cluster extends Thread {
     public void setHdfsWriteOnly(boolean hdfsWriteOnly) {
       this.hdfsWriteOnly = hdfsWriteOnly;
     }
+
+    public boolean isColocatedWith() {
+      return isColocatedWith;
+    }
+
+    public void setColocatedWith(boolean isColocatedWith) {
+      this.isColocatedWith = isColocatedWith;
+    }
+
+    public String getRegionColcatedWith() {
+      return regionColcatedWith;
+    }
+
+    public void setRegionColcatedWith(String regionColcatedWith) {
+      this.regionColcatedWith = regionColcatedWith;
+    }
+
+    public long getEntrySize_columnStore() {
+      return entrySize_columnStore;
+    }
+
+    public void setEntrySize_columnStore(long entrySize_columnStore) {
+      this.entrySize_columnStore = entrySize_columnStore;
+    }
+
+    public long getSystemRegionEntryCount_columnStore() {
+      return SystemRegionEntryCount_columnStore;
+    }
+
+    public void setSystemRegionEntryCount_columnStore(long systemRegionEntryCount_columnStore) {
+      SystemRegionEntryCount_columnStore = systemRegionEntryCount_columnStore;
+    }
+
+    public long getRowsInCachedBatches_columnStore() {
+      return RowsInCachedBatches_columnStore;
+    }
+
+    public void setRowsInCachedBatches_columnStore(long rowsInCachedBatches_columnStore) {
+      RowsInCachedBatches_columnStore = rowsInCachedBatches_columnStore;
+    }
+
+    public float getDiskReadsRate_columnStore() {
+      return diskReadsRate_columnStore;
+    }
+
+    public void setDiskReadsRate_columnStore(float diskReadsRate_columnStore) {
+      this.diskReadsRate_columnStore = diskReadsRate_columnStore;
+    }
+
+    public float getDiskWritesRate_columnStore() {
+      return diskWritesRate_columnStore;
+    }
+
+    public void setDiskWritesRate_columnStore(float diskWritesRate_columnStore) {
+      this.diskWritesRate_columnStore = diskWritesRate_columnStore;
+    }
+
+    public float getGetsRate_columnStore() {
+      return getsRate_columnStore;
+    }
+
+    public void setGetsRate_columnStore(float getsRate_columnStore) {
+      this.getsRate_columnStore = getsRate_columnStore;
+    }
+
+    public float getPutsRate_columnStore() {
+      return putsRate_columnStore;
+    }
+
+    public void setPutsRate_columnStore(float putsRate_columnStore) {
+      this.putsRate_columnStore = putsRate_columnStore;
+    }
+
+    public float getAverageReads_columnStore() {
+      return averageReads_columnStore;
+    }
+
+    public void setAverageReads_columnStore(float averageReads_columnStore) {
+      this.averageReads_columnStore = averageReads_columnStore;
+    }
+
+    public float getAverageWrites_columnStore() {
+      return averageWrites_columnStore;
+    }
+
+    public void setAverageWrites_columnStore(float averageWrites_columnStore) {
+      this.averageWrites_columnStore = averageWrites_columnStore;
+    }
+
+    public long getDiskUsage_columnStore() {
+      return diskUsage_columnStore;
+    }
+
+    public void setDiskUsage_columnStore(long diskUsage_columnStore) {
+      this.diskUsage_columnStore = diskUsage_columnStore;
+    }
+
   }
 
   /**

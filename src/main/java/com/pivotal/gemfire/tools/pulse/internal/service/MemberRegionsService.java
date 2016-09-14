@@ -92,9 +92,13 @@ public class MemberRegionsService implements PulseService {
           }
 
           regionJSON.put("type", memberRegion.getRegionType());
+
+          // collective entry count from region and its column store region 
           regionJSON
-              .put("entryCount", memberRegion.getSystemRegionEntryCount());
-          Long entrySize = memberRegion.getEntrySize();
+              .put("entryCount", (memberRegion.getSystemRegionEntryCount() + memberRegion.getRowsInCachedBatches_columnStore()));
+
+          // collective entry size from region and its column store region
+          Long entrySize = memberRegion.getEntrySize() + memberRegion.getEntrySize_columnStore();
 
           DecimalFormat form = new DecimalFormat(
               PulseConstants.DECIMAL_FORMAT_PATTERN_2);

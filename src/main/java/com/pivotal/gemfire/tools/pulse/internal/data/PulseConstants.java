@@ -126,6 +126,8 @@ public class PulseConstants {
 
   public static final String MBEAN_KEY_PROPERTY_MEMBER = "member";
 
+  public static final String MBEAN_ATTRIBUTE_SUBSTRING_COLUMNSTORE = "_COLUMN_STORE_";
+
   public static final String MBEAN_ATTRIBUTE_MEMBER = "Member";
   public static final String MBEAN_ATTRIBUTE_MEMBERS = "Members";
   public static final String MBEAN_ATTRIBUTE_MANAGER = "Manager";
@@ -179,6 +181,7 @@ public class PulseConstants {
   public static final String MBEAN_ATTRIBUTE_REGIONTYPE = "RegionType";
   public static final String MBEAN_ATTRIBUTE_ENTRYSIZE = "EntrySize";
   public static final String MBEAN_ATTRIBUTE_SYSTEMREGIONENTRYCOUNT = "SystemRegionEntryCount";
+  public static final String MBEAN_ATTRIBUTE_ROWSINCACHEDBATCHES = "RowsInCachedBatches";
   public static final String MBEAN_ATTRIBUTE_PERSISTENTENABLED = "PersistentEnabled";
   public static final String MBEAN_ATTRIBUTE_NAME = "Name";
   public static final String MBEAN_ATTRIBUTE_GATEWAYENABLED = "GatewayEnabled";
@@ -248,6 +251,7 @@ public class PulseConstants {
   public static final String MBEAN_OPERATION_SHOWALLCLIENTS = "showAllClientStats";
   public static final String MBEAN_OPERATION_LISTREGIONATTRIBUTES = "listRegionAttributes";
   public static final String MBEAN_OPERATION_QUERYDATABROWSER = "queryData";
+  public static final String MBEAN_OPERATION_LISTPARTITIONATTRIBUTES = "listPartitionAttributes";
 
   // COMPOSITE DATA KEYS
   public static final String COMPOSITE_DATA_KEY_CLIENTID = "clientId";
@@ -267,6 +271,7 @@ public class PulseConstants {
   public static final String COMPOSITE_DATA_KEY_HDFSWRITEONLY = "hdfsWriteOnly";
   public static final String COMPOSITE_DATA_KEY_ENABLEOFFHEAPMEMORY = "enableOffHeapMemory";
   public static final String COMPOSITE_DATA_KEY_CONNECTIONSOPEN = "connectionsOpen";
+  public static final String COMPOSITE_DATA_KEY_COLOCATEDWITH = "colocatedWith";
 
   public static final String ALERT_DESC_SEVERE = "Severe Alert! The cluster is on fire !";
   public static final String ALERT_DESC_ERROR = "Error Alert! There is a problem with your cluster ! Better fix it !";
@@ -289,7 +294,7 @@ public class PulseConstants {
       MBEAN_ATTRIBUTE_MEMBERCOUNT, MBEAN_ATTRIBUTE_PERSISTENTENABLED,
       MBEAN_ATTRIBUTE_NAME, MBEAN_ATTRIBUTE_GATEWAYENABLED,
       MBEAN_ATTRIBUTE_DISKUSAGE, MBEAN_ATTRIBUTE_AVERAGEWRITES,
-      MBEAN_ATTRIBUTE_AVERAGEREADS };
+      MBEAN_ATTRIBUTE_AVERAGEREADS, MBEAN_ATTRIBUTE_ROWSINCACHEDBATCHES };
 
   public static final String[] CLUSTER_MBEAN_ATTRIBUTES = {
       MBEAN_ATTRIBUTE_MEMBERCOUNT, MBEAN_ATTRIBUTE_NUMCLIENTS,

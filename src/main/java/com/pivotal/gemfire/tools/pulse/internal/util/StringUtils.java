@@ -79,4 +79,16 @@ public class StringUtils {
     String regionName = "/" + tableName.replace('.', '/');
     return regionName;
   }
+
+  /**
+   * Function to get column store region name/full path derived from table name
+   * 
+   * @param regionName
+   *          String to be made compliant.
+   * @return string compliant string.
+   */
+  public static String getRegionColumnStoreNameFromTableName(String tableName) {
+    String regionName = tableName.replace(".", "__").concat("_COLUMN_STORE_");
+    return regionName;
+  }
 }
