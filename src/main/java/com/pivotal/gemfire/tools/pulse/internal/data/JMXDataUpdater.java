@@ -122,8 +122,8 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
       this.MBEAN_OBJECT_NAME_STATEMENT_DISTRIBUTED = new ObjectName(
           PulseConstants.OBJECT_NAME_STATEMENT_DISTRIBUTED);
 
-      // For GemFireXD
-      if (PulseConstants.PRODUCT_NAME_GEMFIREXD.equalsIgnoreCase(PulseController
+      // For SnappyData
+      if (PulseConstants.PRODUCT_NAME_SNAPPYDATA.equalsIgnoreCase(PulseController
           .getPulseProductSupport())) {
         this.MBEAN_OBJECT_NAME_TABLE_AGGREGATE = new ObjectName(
             PulseConstants.OBJECT_NAME_TABLE_AGGREGATE);
@@ -463,9 +463,9 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
       Set<ObjectName> tableMBeans = this.mbs.queryNames(
           this.MBEAN_OBJECT_NAME_TABLE_AGGREGATE, null);
 
-      if (PulseConstants.PRODUCT_NAME_GEMFIREXD.equalsIgnoreCase(PulseController
+      if (PulseConstants.PRODUCT_NAME_SNAPPYDATA.equalsIgnoreCase(PulseController
           .getPulseProductSupport())) {
-        // For GemFireXD
+        // For SnappyData
         for (ObjectName tableMBean : tableMBeans) {
           String regNameFromTable = StringUtils
               .getRegionNameFromTableName(tableMBean.getKeyProperty("table"));
@@ -510,11 +510,11 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
               .getKeyProperty(PulseConstants.MBEAN_KEY_PROPERTY_SERVICE)
               .equals(PulseConstants.MBEAN_KEY_PROPERTY_SERVICE_VALUE_REGION)) {
 
-            if (PulseConstants.PRODUCT_NAME_GEMFIREXD
+            if (PulseConstants.PRODUCT_NAME_SNAPPYDATA
                 .equalsIgnoreCase(PulseController.getPulseProductSupport())) {
 
                 if(tableMBeans.size() > 0 ){
-                    // For GemFireXD
+                    // For SnappyData
                     for (ObjectName tableMBean : tableMBeans) {
                         String regNameFromTable = StringUtils
                                 .getRegionNameFromTableName(tableMBean
@@ -636,7 +636,7 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
         this.isAddedNotiListner = true;
       }
 
-      if (PulseConstants.PRODUCT_NAME_GEMFIREXD.equalsIgnoreCase(PulseController
+      if (PulseConstants.PRODUCT_NAME_SNAPPYDATA.equalsIgnoreCase(PulseController
           .getPulseProductSupport())) {
         // Reset to zero
         cluster.setServerCount(0);
@@ -785,10 +785,10 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
 
         }
 
-        // For GemFireXD or GemFire
-        if (PulseConstants.PRODUCT_NAME_GEMFIREXD
+        // For SnappyData or GemFire
+        if (PulseConstants.PRODUCT_NAME_SNAPPYDATA
             .equalsIgnoreCase(PulseController.getPulseProductSupport())) {
-          // For GemFireXD
+          // For SnappyData
           // Do nothing
         } else {
           // For GemFire
@@ -801,11 +801,11 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
 
       }
 
-      // GEMFIREXD attributes
-      if (PulseConstants.PRODUCT_NAME_GEMFIREXD.equalsIgnoreCase(PulseController
+      // SnappyData attributes
+      if (PulseConstants.PRODUCT_NAME_SNAPPYDATA.equalsIgnoreCase(PulseController
           .getPulseProductSupport())) {
 
-        try { // get GemFireXD cluster mbean
+        try { // get SnappyData cluster mbean
 
           ObjectName sfMemberMbeansObjectName = new ObjectName(
               PulseConstants.OBJECT_NAME_SF_CLUSTER);
@@ -1308,8 +1308,8 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
       // TODO : Uncomment below code when sql fire mbean attributes are
       // available
       /*
-       * // IF GEMFIREXD if
-       * (PulseConstants.PRODUCT_NAME_GEMFIREXD.equalsIgnoreCase(PulseController
+       * // IF SnappyData if
+       * (PulseConstants.PRODUCT_NAME_SNAPPYDATA.equalsIgnoreCase(PulseController
        * .getPulseProductSupport())) {
        * 
        * try { String tableName = this.getTableNameFromRegionName(region
@@ -1327,11 +1327,11 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
        * 
        * if (attribute.getName().equals(
        * PulseConstants.MBEAN_ATTRIBUTE_ENTRYSIZE)) {
-       * System.out.println("[GemFireXD] setting entry size");
+       * System.out.println("[SnappyData] setting entry size");
        * region.setEntrySize(getLongAttribute(attribute.getValue(),
        * attribute.getName())); } else if (attribute.getName().equals(
        * PulseConstants.MBEAN_ATTRIBUTE_NUMBEROFROWS)) {
-       * System.out.println("[GemFireXD] setting num of rows");
+       * System.out.println("[SnappyData] setting num of rows");
        * region.setSystemRegionEntryCount(getLongAttribute(
        * attribute.getValue(), attribute.getName())); } } } catch
        * (MalformedObjectNameException e) { LOGGER.warning(e); } catch
@@ -1729,12 +1729,12 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
       }
     }
 
-    // GemFireXD specific attributes
+    // SnappyData specific attributes
     if (PulseController.getPulseProductSupport().equalsIgnoreCase(
-        PulseConstants.PRODUCT_NAME_GEMFIREXD)) {
+        PulseConstants.PRODUCT_NAME_SNAPPYDATA)) {
 
       try {
-        // get GemFireXD mbeans
+        // get SnappyData mbeans
         String memberName = mbeanName
             .getKeyProperty(PulseConstants.MBEAN_KEY_PROPERTY_MEMBER);
 
@@ -1765,8 +1765,8 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
               
               CompositeData nscConnStats = (CompositeData) attribute.getValue();
 
-              // Update GemFireXD client count
-              member.setNumGemFireXDClients(getLongAttribute(nscConnStats
+              // Update SnappyData client count
+              member.setNumSnappyDataClients(getLongAttribute(nscConnStats
                   .get(PulseConstants.COMPOSITE_DATA_KEY_CONNECTIONSOPEN),
                   PulseConstants.COMPOSITE_DATA_KEY_CONNECTIONSOPEN));
             }

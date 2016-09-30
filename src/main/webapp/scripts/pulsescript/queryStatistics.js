@@ -30,7 +30,7 @@ $(document).ready(function() {
   // modify UI text as per requirement
   customizeUI();
 
-  if (CONST_BACKEND_PRODUCT_GEMFIREXD == productname.toLowerCase()) {
+  if (CONST_BACKEND_PRODUCT_SNAPPYDATA == productname.toLowerCase()) {
     // Do nothing
   } else {
     // Redirect to Cluster details page

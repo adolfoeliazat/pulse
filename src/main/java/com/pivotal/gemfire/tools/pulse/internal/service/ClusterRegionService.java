@@ -191,7 +191,7 @@ public class ClusterRegionService implements PulseService {
         regionJSON.put("compressionCodec", this.VALUE_NA);
       }
 
-      if (PulseConstants.PRODUCT_NAME_GEMFIREXD.equalsIgnoreCase(PulseController
+      if (PulseConstants.PRODUCT_NAME_SNAPPYDATA.equalsIgnoreCase(PulseController
           .getPulseProductSupport())) {
         // Convert region path to dot separated region path
         regionJSON.put("regionPath",

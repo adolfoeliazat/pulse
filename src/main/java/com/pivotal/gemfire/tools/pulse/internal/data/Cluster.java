@@ -255,7 +255,7 @@ public class Cluster extends Thread {
     private long totalDiskUsage;
     private String queueBacklog;
     private String id;
-    private long numGemFireXDClients = 0;
+    private long numSnappyDataClients = 0;
 
     private CircularFifoBuffer cpuUsageSamples = new CircularFifoBuffer(
         MAX_SAMPLE_SIZE);
@@ -693,12 +693,12 @@ public class Cluster extends Thread {
       this.garbageCollectionSamples = garbageCollectionSamples;
     }
 
-    public long getNumGemFireXDClients() {
-      return numGemFireXDClients;
+    public long getNumSnappyDataClients() {
+      return numSnappyDataClients;
     }
 
-    public void setNumGemFireXDClients(long numGemFireXDClients) {
-      this.numGemFireXDClients = numGemFireXDClients;
+    public void setNumSnappyDataClients(long numSnappyDataClients) {
+      this.numSnappyDataClients = numSnappyDataClients;
     }
 
     public void updateMemberClientsHMap(

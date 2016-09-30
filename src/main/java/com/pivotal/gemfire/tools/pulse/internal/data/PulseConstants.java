@@ -106,16 +106,16 @@ public class PulseConstants {
 
   // CONSTANTS FOR MBEAN DATA
   public static final String OBJECT_DOMAIN_NAME_GEMFIRE = "GemFire";
-  public static final String OBJECT_DOMAIN_NAME_GEMFIREXD = "GemFireXD";
+  public static final String OBJECT_DOMAIN_NAME_SNAPPYDATA = "GemFireXD";
   public static final String OBJECT_NAME_MEMBER = OBJECT_DOMAIN_NAME_GEMFIRE + ":type=Member,*";
   public static final String OBJECT_NAME_MEMBER_MANAGER = OBJECT_DOMAIN_NAME_GEMFIRE + ":service=Manager,type=Member,*";
   public static final String OBJECT_NAME_SYSTEM_DISTRIBUTED = OBJECT_DOMAIN_NAME_GEMFIRE + ":service=System,type=Distributed";
   public static final String OBJECT_NAME_REGION_DISTRIBUTED = OBJECT_DOMAIN_NAME_GEMFIRE + ":service=Region,type=Distributed,*";
-  public static final String OBJECT_NAME_STATEMENT_DISTRIBUTED = OBJECT_DOMAIN_NAME_GEMFIREXD + ":service=Statement,type=Aggregate,*";
-  public static final String OBJECT_NAME_SF_CLUSTER = OBJECT_DOMAIN_NAME_GEMFIREXD + ":service=Cluster";
-  public static final String OBJECT_NAME_SF_MEMBER_PATTERN = OBJECT_DOMAIN_NAME_GEMFIREXD + ":group=*,type=Member,member=";
-  public static final String OBJECT_NAME_TABLE_AGGREGATE = OBJECT_DOMAIN_NAME_GEMFIREXD + ":service=Table,type=Aggregate,table=*";
-  public static final String OBJECT_NAME_TABLE_AGGREGATE_PATTERN = OBJECT_DOMAIN_NAME_GEMFIREXD + ":service=Table,type=Aggregate,table=";
+  public static final String OBJECT_NAME_STATEMENT_DISTRIBUTED = OBJECT_DOMAIN_NAME_SNAPPYDATA + ":service=Statement,type=Aggregate,*";
+  public static final String OBJECT_NAME_SF_CLUSTER = OBJECT_DOMAIN_NAME_SNAPPYDATA + ":service=Cluster";
+  public static final String OBJECT_NAME_SF_MEMBER_PATTERN = OBJECT_DOMAIN_NAME_SNAPPYDATA + ":group=*,type=Member,member=";
+  public static final String OBJECT_NAME_TABLE_AGGREGATE = OBJECT_DOMAIN_NAME_SNAPPYDATA + ":service=Table,type=Aggregate,table=*";
+  public static final String OBJECT_NAME_TABLE_AGGREGATE_PATTERN = OBJECT_DOMAIN_NAME_SNAPPYDATA + ":service=Table,type=Aggregate,table=";
 
   public static final String MBEAN_KEY_PROPERTY_SERVICE = "service";
   public static final String MBEAN_KEY_PROPERTY_SERVICE_VALUE_REGION = "Region";
@@ -282,7 +282,7 @@ public class PulseConstants {
   public static final String NOTIFICATION_TYPE_REGION_DESTROYED = "gemfire.distributedsystem.cache.region.closed";
 
   public static final String PRODUCT_NAME_GEMFIRE = "gemfire"; // For GemFire
-  public static final String PRODUCT_NAME_GEMFIREXD = "gemfirexd"; // For GemFireXD
+  public static final String PRODUCT_NAME_SNAPPYDATA = "snappydata"; // For SnappyData
 
   public static final String[] REGION_MBEAN_ATTRIBUTES = {
       MBEAN_ATTRIBUTE_MEMBERS, MBEAN_ATTRIBUTE_FULLPATH,

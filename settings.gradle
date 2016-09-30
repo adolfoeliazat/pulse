@@ -14,4 +14,4 @@
  * permissions and limitations under the License. See accompanying
  * LICENSE file.
  */
-rootProject.name = 'gemfirexd-pulse'
+rootProject.name = 'snappydata-pulse'

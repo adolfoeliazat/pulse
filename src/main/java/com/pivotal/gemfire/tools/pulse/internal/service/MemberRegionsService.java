@@ -82,7 +82,7 @@ public class MemberRegionsService implements PulseService {
           JSONObject regionJSON = new JSONObject();
           regionJSON.put(this.NAME, memberRegion.getName());
 
-          if (PulseConstants.PRODUCT_NAME_GEMFIREXD
+          if (PulseConstants.PRODUCT_NAME_SNAPPYDATA
               .equalsIgnoreCase(PulseController.getPulseProductSupport())) {
             // Convert region path to dot separated region path
             regionJSON.put("fullPath", StringUtils

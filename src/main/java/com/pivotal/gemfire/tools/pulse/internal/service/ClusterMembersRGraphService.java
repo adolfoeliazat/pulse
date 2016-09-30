@@ -192,8 +192,8 @@ public class ClusterMembersRGraphService implements PulseService {
 
         // Number of member clients
         if (PulseController.getPulseProductSupport().equalsIgnoreCase(
-            PulseConstants.PRODUCT_NAME_GEMFIREXD)) {
-          memberData.put(this.CLIENTS, member.getNumGemFireXDClients());
+            PulseConstants.PRODUCT_NAME_SNAPPYDATA)) {
+          memberData.put(this.CLIENTS, member.getNumSnappyDataClients());
         } else {
           memberData.put(this.CLIENTS, member.getMemberClientsHMap().size());
         }

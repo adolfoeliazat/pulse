@@ -114,8 +114,8 @@ public class PulseAppListener implements ServletContextListener {
       String pulseProduct = pulseProperties.getProperty(PulseConstants.APPLICATION_PROPERTY_PULSE_PRODUCTSUPPORT);
       // default is GemFire
 
-      if ((pulseProduct != null) && (pulseProduct.trim().equalsIgnoreCase(PulseConstants.PRODUCT_NAME_GEMFIREXD))) {
-        PulseController.setPulseProductSupport(PulseConstants.PRODUCT_NAME_GEMFIREXD);
+      if ((pulseProduct != null) && (pulseProduct.trim().equalsIgnoreCase(PulseConstants.PRODUCT_NAME_SNAPPYDATA))) {
+        PulseController.setPulseProductSupport(PulseConstants.PRODUCT_NAME_SNAPPYDATA);
       }
     }
 
@@ -149,7 +149,7 @@ public class PulseAppListener implements ServletContextListener {
       
       boolean pulseEmbededGfxd = Boolean.getBoolean(PulseConstants.SYSTEM_PROPERTY_PULSE_EMBEDDED_GFXD);
       if(pulseEmbededGfxd){
-        PulseController.setPulseProductSupport(PulseConstants.PRODUCT_NAME_GEMFIREXD);
+        PulseController.setPulseProductSupport(PulseConstants.PRODUCT_NAME_SNAPPYDATA);
         if (LOGGER.infoEnabled()) {
           LOGGER.info(resourceBundle
               .getString("LOG_MSG_APP_RUNNING_EMBEDDED_GFXD_MODE"));

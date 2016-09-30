@@ -36,7 +36,7 @@ $(document).ready(function() {
       $('#user_name').prop('disabled', true);
       $('#user_password').prop('disabled', true);
       $('input[type="submit"]').prop('disabled', true);
-      $("#errorText").html("Unable to determine backend product [GemFire / GemFireXD]<br>"+textStatus);
+      $("#errorText").html("Unable to determine backend product [GemFire / SnappyData]<br>"+textStatus);
       $("#errorMasterBlock").show();
     }
   });

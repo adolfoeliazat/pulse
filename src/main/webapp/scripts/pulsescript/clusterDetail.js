@@ -31,14 +31,14 @@ $(document).ready(function() {
   // modify UI text as per requirement
   customizeUI();
 
-  if (CONST_BACKEND_PRODUCT_GEMFIREXD == productname.toLowerCase()) {
-    alterHtmlContainer(CONST_BACKEND_PRODUCT_GEMFIREXD);
+  if (CONST_BACKEND_PRODUCT_SNAPPYDATA == productname.toLowerCase()) {
+    alterHtmlContainer(CONST_BACKEND_PRODUCT_SNAPPYDATA);
 
     // "ClusterDetails" service callback handler
-    getClusterDetailsBack = getClusterDetailsGemFireXDBack;
+    getClusterDetailsBack = getClusterDetailsSnappyDataBack;
 
     // "ClusterKeyStatistics" service callback handler
-    getClusterKeyStatisticsBack = getClusterKeyStatisticsGemFireXDBack;
+    getClusterKeyStatisticsBack = getClusterKeyStatisticsSnappyDataBack;
 
   } else {
     alterHtmlContainer(CONST_BACKEND_PRODUCT_GEMFIRE);
@@ -66,10 +66,10 @@ $(document).ready(function() {
 
 /*
  * Function to show and hide html elements/components based upon whether product
- * is GemFireXD or GemFire 
+ * is SnappyData or GemFire 
  */
 function alterHtmlContainer(prodname){
-  if(CONST_BACKEND_PRODUCT_GEMFIREXD == prodname.toLowerCase()){
+  if(CONST_BACKEND_PRODUCT_SNAPPYDATA == prodname.toLowerCase()){
     // Hide HTML for following
     $('#clusterUniqueCQsContainer').hide();
     $('#SubscriptionsContainer').hide();

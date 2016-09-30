@@ -83,8 +83,8 @@ public class MemberDetailsService implements PulseService {
 
         // Number of member clients
         if (PulseController.getPulseProductSupport().equalsIgnoreCase(
-            PulseConstants.PRODUCT_NAME_GEMFIREXD)){
-          responseJSON.put("numClients", clusterMember.getNumGemFireXDClients());
+            PulseConstants.PRODUCT_NAME_SNAPPYDATA)){
+          responseJSON.put("numClients", clusterMember.getNumSnappyDataClients());
         }else{
           responseJSON.put("numClients", clusterMember.getMemberClientsHMap().size());
         }

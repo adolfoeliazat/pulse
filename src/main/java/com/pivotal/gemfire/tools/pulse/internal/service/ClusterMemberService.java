@@ -96,8 +96,8 @@ public class ClusterMemberService implements PulseService {
 
         // Number of member clients
         if (PulseController.getPulseProductSupport().equalsIgnoreCase(
-            PulseConstants.PRODUCT_NAME_GEMFIREXD)){
-          memberJSON.put("clients", clusterMember.getNumGemFireXDClients());
+            PulseConstants.PRODUCT_NAME_SNAPPYDATA)){
+          memberJSON.put("clients", clusterMember.getNumSnappyDataClients());
         }else{
           memberJSON.put("clients", clusterMember.getMemberClientsHMap().size());
         }

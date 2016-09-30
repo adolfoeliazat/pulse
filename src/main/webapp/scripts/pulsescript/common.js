@@ -17,7 +17,7 @@
 
 // CONSTANTS
 var CONST_BACKEND_PRODUCT_GEMFIRE = "gemfire";
-var CONST_BACKEND_PRODUCT_GEMFIREXD = "gemfirexd";
+var CONST_BACKEND_PRODUCT_SNAPPYDATA = "snappydata";
 
 var host = '';
 var port = '';

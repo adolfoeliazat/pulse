@@ -109,11 +109,11 @@ var getClusterDetailsGemFireBack = function(data) {
 };
 
 /**
- * For GemFireXD, handler for ClusterDetails service
+ * For SnappyData, handler for ClusterDetails service
  * function used for getting the response of Cluster Basic Details and wired
  * them with HTML representing tags.
  */
-var getClusterDetailsGemFireXDBack = function(data) {
+var getClusterDetailsSnappyDataBack = function(data) {
 
   if (data.connectedFlag) {
     $('#connectionStatusDiv').hide();
@@ -228,11 +228,11 @@ var getClusterKeyStatisticsGemFireBack = function(data) {
 };
 
 /**
- * For GemFireXD, handler for ClusterKeyStatistics service
+ * For SnappyData, handler for ClusterKeyStatistics service
  * function used for getting the response of Cluster Key Statistics widget and
  * wired them with HTML representing tags.
  */
-var getClusterKeyStatisticsGemFireXDBack = function(data) {
+var getClusterKeyStatisticsSnappyDataBack = function(data) {
 
   // sparkline graph options
   var sparklineOptions = {

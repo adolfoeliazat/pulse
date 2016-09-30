@@ -31,8 +31,8 @@ $(document).ready(function() {
   // modify UI text as per requirement
   customizeUI();
 
-  if (CONST_BACKEND_PRODUCT_GEMFIREXD == productname.toLowerCase()) {
-    alterHtmlContainer(CONST_BACKEND_PRODUCT_GEMFIREXD);
+  if (CONST_BACKEND_PRODUCT_SNAPPYDATA == productname.toLowerCase()) {
+    alterHtmlContainer(CONST_BACKEND_PRODUCT_SNAPPYDATA);
   } else {
     alterHtmlContainer(CONST_BACKEND_PRODUCT_GEMFIRE);
   }
@@ -48,10 +48,10 @@ $(document).ready(function() {
 
 /*
  * Function to show and hide html elements/components based upon whether product
- * is GemFireXD or GemFire
+ * is SnappyData or GemFire
  */
 function alterHtmlContainer(prodname) {
-  if (CONST_BACKEND_PRODUCT_GEMFIREXD == prodname.toLowerCase()) {
+  if (CONST_BACKEND_PRODUCT_SNAPPYDATA == prodname.toLowerCase()) {
     // Hide HTML for following
 
     // Show HTML for following
@@ -568,7 +568,7 @@ function createMemberRegionsGrid() {
           });
 
           // change col names depend on product
-          if (CONST_BACKEND_PRODUCT_GEMFIREXD == productname.toLowerCase()) {
+          if (CONST_BACKEND_PRODUCT_SNAPPYDATA == productname.toLowerCase()) {
             jQuery("#memberRegionsList").jqGrid('setLabel', 'entryCount',
                 jQuery.i18n.prop('pulse-entrycount-custom'));
             jQuery("#memberRegionsList").jqGrid('setLabel', 'entrySize',
