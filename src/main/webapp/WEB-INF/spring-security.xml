@@ -37,6 +37,8 @@
 		<!-- Restricted urls -->
 		<!-- Hide Data Browser tab for Pulse-Cheetah Release -->
 		<intercept-url pattern="/DataBrowser.html" access="ROLE_RESTRICTED" />
+		<!-- Hide Query Statistics tab for iSight Release -->
+		<intercept-url pattern="/QueryStatistics.html" access="ROLE_RESTRICTED" />
 		<!-- Restricted urls -->
 
 		<!-- Can be invoked only with auth -->
