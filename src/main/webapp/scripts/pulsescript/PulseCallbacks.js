@@ -147,9 +147,10 @@ var getClusterDetailsSnappyDataBack = function(data) {
   $('#clusterServersText').html(data.servers);
   $('#clusterClientsText').html(data.clients);
   $('#clusterLocatorsText').html(data.locators);
+  $('#clusterLeadsText').html(data.leads);
   $('#clusterTotalRegionsText').html(data.totalRegions);
   $('#clusterTotalHeap').html(data.totalHeap);
-  $('#clusterFunctions').html(data.functions);
+  //$('#clusterFunctions').html(data.functions);
   $('#clusterTxnCommittedText').html(data.txnCommitted);
   $('#clusterTxnRollbackText').html(data.txnRollback);
   $('#userName').html(data.userName);

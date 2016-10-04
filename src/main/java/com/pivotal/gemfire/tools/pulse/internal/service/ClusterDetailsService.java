@@ -83,6 +83,7 @@ public class ClusterDetailsService implements PulseService {
       responseJSON.put("servers", cluster.getServerCount());
       responseJSON.put("clients", cluster.getClientConnectionCount());
       responseJSON.put("locators", cluster.getLocatorCount());
+      responseJSON.put("leads", cluster.getLeadCount());
       responseJSON.put("totalRegions", cluster.getTotalRegionCount());
       Long heapSize = cluster.getTotalHeapSize();
 

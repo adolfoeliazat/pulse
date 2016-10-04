@@ -98,6 +98,7 @@ public class Cluster extends Thread {
   private Long registeredCQCount;
   private int subscriptionCount;
   private int serverCount;
+  private int leadCount;
   private int txnCommittedCount;
   private int txnRollbackCount;
   private Long usedHeapSize = 0L;
@@ -246,6 +247,7 @@ public class Cluster extends Thread {
     private boolean isGateway;
     private boolean isLocator;
     private boolean isServer;
+    private boolean isLead;
     private Double loadAverage;
     private int numThreads;
     private Long totalFileDescriptorOpen;
@@ -624,6 +626,14 @@ public class Cluster extends Thread {
 
     public void setServer(boolean isServer) {
       this.isServer = isServer;
+    }
+
+    public boolean isLead() {
+      return isLead;
+    }
+
+    public void setLead(boolean isLead) {
+      this.isLead = isLead;
     }
 
     public CircularFifoBuffer getCpuUsageSamples() {
@@ -2183,6 +2193,14 @@ public class Cluster extends Thread {
 
   public void setServerCount(int serverCount) {
     this.serverCount = serverCount;
+  }
+
+  public int getLeadCount() {
+    return leadCount;
+  }
+
+  public void setLeadCount(int leadCount) {
+    this.leadCount = leadCount;
   }
 
   public int getTxnCommittedCount() {

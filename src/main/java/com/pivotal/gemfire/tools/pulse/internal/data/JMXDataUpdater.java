@@ -641,6 +641,7 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
         // Reset to zero
         cluster.setServerCount(0);
         cluster.setTotalRegionCount(0);
+        cluster.setLeadCount(0);
       } else {
         String[] serverCnt = (String[]) (this.mbs.invoke(mbeanName,
             PulseConstants.MBEAN_OPERATION_LISTCACHESERVER, null, null));
@@ -1759,6 +1760,15 @@ public class JMXDataUpdater implements IClusterUpdater, NotificationListener {
               // Update Server count
               if (member.isServer()) {
                 cluster.setServerCount(cluster.getServerCount() + 1);
+              }
+            } else if (attribute.getName().equals(
+                PulseConstants.MBEAN_ATTRIBUTE_LEAD)) {
+              member.setLead(getBooleanAttribute(attribute.getValue(),
+                  attribute.getName()));
+
+              // Update Lead count
+              if (member.isLead()) {
+                cluster.setLeadCount(cluster.getLeadCount() + 1);
               }
             } else if (attribute.getName().equals(
                     PulseConstants.MBEAN_ATTRIBUTE_NETWORKSERVERCLIENTCONNECTIONSTATS)) {

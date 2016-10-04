@@ -133,6 +133,7 @@ public class PulseConstants {
   public static final String MBEAN_ATTRIBUTE_MANAGER = "Manager";
   public static final String MBEAN_ATTRIBUTE_LOCATOR = "Locator";
   public static final String MBEAN_ATTRIBUTE_SERVER = "Server";
+  public static final String MBEAN_ATTRIBUTE_LEAD = "Lead";
   public static final String MBEAN_ATTRIBUTE_DATASTORE = "DataStore";
   public static final String MBEAN_ATTRIBUTE_ID = "Id";
 
@@ -350,7 +351,7 @@ public class PulseConstants {
       MBEAN_ATTRIBUTE_NETWORKSERVERCLIENTCONNECTIONSTATS };
 
   public static final String[] SF_MEMBER_MBEAN_ATTRIBUTES = {
-    MBEAN_ATTRIBUTE_DATASTORE,
+    MBEAN_ATTRIBUTE_DATASTORE, MBEAN_ATTRIBUTE_LEAD,
     MBEAN_ATTRIBUTE_NETWORKSERVERCLIENTCONNECTIONSTATS };
 
   public static final String[] SF_TABLE_MBEAN_ATTRIBUTES = {
