@@ -59,6 +59,10 @@ var memberWarningFlag = false;
 // end: flags used for checking whether the r-graph icon images already loaded
 // or not
 
+// Flags to check whether data is loaded first time or not 
+var isFirstTimeDataLoad = true;
+var isDepthOneEncounteredOnce = false;
+
 // function used for refreshing R Graph nodes color based on Alerts
 function refreshNodeAccAlerts() {
   clusteRGraph.graph.eachNode(function(node) {
@@ -68,6 +72,13 @@ function refreshNodeAccAlerts() {
     }
     if (node._depth == 1) {
       var expandedNode = false;
+
+      if(isFirstTimeDataLoad){
+        // To expand all hosts on first time data load
+        expanededNodIds.push(node.id);
+        isDepthOneEncounteredOnce = true;
+      }
+
       for ( var i = 0; i < expanededNodIds.length; i++) {
         if (expanededNodIds[i] == node.id) {
           expandedNode = true;
@@ -110,6 +121,11 @@ function refreshNodeAccAlerts() {
       }
     }
   });
+
+  //if R-Graph is refreshed first time
+  if(isFirstTimeDataLoad && isDepthOneEncounteredOnce){
+    isFirstTimeDataLoad = false;
+  }
 }
 
 // function used for defining custom nodes for R-Graph
