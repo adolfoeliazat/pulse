@@ -29,7 +29,10 @@ $(document).ready(function() {
 
       // modify UI text as per requirement
       customizeUI();
-      
+
+      // For iSight
+      populateUserLoginDetails();
+
     },
     error: function(jqXHR, textStatus, errorThrown){
 
@@ -87,6 +90,13 @@ function pageOnLoad(){
     }
   });
   
+}
+
+// For iSight. populates user login details
+function populateUserLoginDetails(){
+  // set login details as admin/admin
+  $("#user_name").val("admin");
+  $("#user_password").val("admin");
 }
 
 function displayErrorMessage(errorId){
