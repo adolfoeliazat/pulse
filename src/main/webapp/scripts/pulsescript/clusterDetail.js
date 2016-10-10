@@ -75,10 +75,16 @@ function alterHtmlContainer(prodname){
     $('#SubscriptionsContainer').hide();
     $('#queriesPerSecContainer').hide();
     
-    // Show HTML for following
-    $('#subTabQueryStatistics').show();
-    $('#TxnCommittedContainer').show();
-    $('#TxnRollbackContainer').show(); 
+    // Show HTML for following, commented out for iSight
+    //$('#subTabQueryStatistics').show();
+    //$('#TxnCommittedContainer').show();
+    //$('#TxnRollbackContainer').show();
+
+    // Hide following stats for iSight
+    $('#clusterTotalHeapContainer').hide();
+    $('#TxnCommittedContainer').hide();
+    $('#TxnRollbackContainer').hide();
+
   }else{
     // Hide HTML for following
     $('#subTabQueryStatistics').hide();

@@ -912,6 +912,11 @@ header {
 	min-width: 70px
 }
 
+.paddingLeftRight40 {
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
 .firstPaddingLeftZero {
 	padding-left: 0px !important
 }

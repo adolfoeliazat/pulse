@@ -429,6 +429,9 @@ var displayRegionDetails = function(data) {
       applyNotApplicableCheck(selectedRegion.dataUsage);
   }
 
+  // Hide regionDiskUsage for iSight
+  $('#regionDiskUsageContainer').hide();
+
   $('#memoryUsageDiv').show();
   var memoryUsagePer = (selectedRegion.memoryUsage / selectedRegion.totalMemory) * 100;
   memoryUsagePer = isNaN(memoryUsagePer) ? 0 : memoryUsagePer;
