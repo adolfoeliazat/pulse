@@ -1564,15 +1564,15 @@ function convertBytesToMBorGB(value){
   var valueInMBorGB = value;
   var isBorKBorMBorGB = "B";
   
-  if (valueInMBorGB > ONE_KB && valueInMBorGB < ONE_MB) {
+  if (valueInMBorGB >= ONE_KB && valueInMBorGB < ONE_MB) {
     // Convert to KBs
     valueInMBorGB = (valueInMBorGB / ONE_KB);
     isBorKBorMBorGB = "KB";
-  }else if(valueInMBorGB > ONE_MB && valueInMBorGB < ONE_GB){
+  }else if(valueInMBorGB >= ONE_MB && valueInMBorGB < ONE_GB){
     // Convert to MBs
     valueInMBorGB = (valueInMBorGB / ONE_MB);
     isBorKBorMBorGB = "MB";
-  }else if(valueInMBorGB > ONE_GB ){
+  }else if(valueInMBorGB >= ONE_GB ){
     // Convert to GBs
     valueInMBorGB = (valueInMBorGB / ONE_GB);
     isBorKBorMBorGB = "GB";
