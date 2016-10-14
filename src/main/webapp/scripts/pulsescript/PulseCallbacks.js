@@ -505,6 +505,10 @@ var getMemberDetailsBack = function(data) {
   $('#openFDs').html(applyNotApplicableCheck(data.openFDs));
   $('#threads').html(data.threads);
 
+  // Hide offHeapFreeSize & offHeapUsedSize for iSight
+  $('#offHeapFreeSize').parent().hide();
+  $('#offHeapUsedSize').parent().hide();
+
   // off heap free size
   var offHeapFreeSize = convertBytesToMBorGB(data.offHeapFreeSize);
   $('#offHeapFreeSize').html(offHeapFreeSize[0]+" "+offHeapFreeSize[1]);
@@ -593,6 +597,9 @@ var getMemberKeyStatisticsBack = function(data) {
   if (cpuUsageTrend.length > 0) {
     avgCPUUsage = sumCPUUsage / cpuUsageTrend.length;
   }
+
+  // Hide CPU Usage for iSight
+  $('#memberCPUUsageValue').parent().hide();
 
   $('#memberCPUUsageValue').html(avgCPUUsage.toFixed(2));
   $('#memberCPUUsageSparkLine').sparkline(data.cpuUsageTrend, sparklineOptions);

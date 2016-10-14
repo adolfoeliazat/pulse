@@ -397,7 +397,7 @@ function createMemberRegionsGrid() {
             {
               name : 'name',
               index : 'name',
-              width : 100,
+              width : 150,
               cellattr : function(rowId, val, rawObject, cm, rdata) {
                 return 'title="Name ' + rawObject.name + ' , Type '
                     + rawObject.type + ' , '
@@ -414,7 +414,7 @@ function createMemberRegionsGrid() {
             {
               name : 'type',
               index : 'type',
-              width : 100,
+              width : 120,
               cellattr : function(rowId, val, rawObject, cm, rdata) {
                 return 'title="Name ' + rawObject.name + ' , Type '
                     + rawObject.type + ' , '
@@ -444,7 +444,8 @@ function createMemberRegionsGrid() {
                     + rawObject.entrySize + '"';
               },
               sortable : true,
-              sorttype : "int"
+              sorttype : "int",
+              hidden : true
             },
             {
               name : 'entrySize',
@@ -467,7 +468,7 @@ function createMemberRegionsGrid() {
             {
               name : 'scope',
               index : 'scope',
-              width : 50,
+              width : 70,
               cellattr : function(rowId, val, rawObject, cm, rdata) {
                 return 'title="Name ' + rawObject.name + ' , Type '
                     + rawObject.type + ' , '

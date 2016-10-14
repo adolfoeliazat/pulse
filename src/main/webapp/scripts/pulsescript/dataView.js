@@ -234,13 +234,13 @@ function createClusterRegionGrid() {
             colModel : [ {
               name : 'name',
               index : 'name',
-              width : 120,
+              width : 170,
               sortable : true,
               sorttype : "string"
             }, {
               name : 'type',
               index : 'type',
-              width : 120,
+              width : 150,
               sortable : true,
               sorttype : "string"
             }, {
@@ -249,7 +249,8 @@ function createClusterRegionGrid() {
               width : 80,
               align : 'right',
               sortable : true,
-              sorttype : "int"
+              sorttype : "int",
+              hidden : true
             }, {
               name : 'entrySize',
               index : 'entrySize',
@@ -413,6 +414,12 @@ var displayRegionDetails = function(data) {
   // document.getElementById("regionWrites").innerHTML = selectedRegion.writes;
   // document.getElementById("regionReads").innerHTML = selectedRegion.reads;
   document.getElementById("regionPersistence").innerHTML = selectedRegion.persistence;
+
+  // Hide region Entry Count, Off-Heap and HDFS-WRITE-ONLY flags for iSight
+  $("#regionEntryCount").parent().hide();
+  $("#regionIsEnableOffHeapMemory").parent().hide();
+  $("#regionIsHdfsWriteOnly").parent().hide();
+
   document.getElementById("regionIsEnableOffHeapMemory").innerHTML = selectedRegion.isEnableOffHeapMemory;
   // document.getElementById("regionCompressionCodec").innerHTML =
   // selectedRegion.compressionCodec;

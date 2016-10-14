@@ -1307,7 +1307,8 @@ header {
 }
 
 .detailsBlock-memberDataView {
-	padding: 5px 4px;
+	/*padding: 5px 4px;*/
+	padding: 5px 40px; /* for iSight */
 	float: left;
 	text-align: center; /*word-wrap:break-word;*/
 }
